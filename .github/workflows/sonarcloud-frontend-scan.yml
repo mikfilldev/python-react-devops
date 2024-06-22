@@ -1,4 +1,4 @@
-name: SonarCloud-python
+name: SonarCloud-react
 
 on:
   push:
@@ -17,13 +17,11 @@ jobs:
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@v2.1.0
       with:
-        projectBaseDir: ./backend
+        projectBaseDir: ./frontend/src
         args: >
           -Dsonar.branch.name=main
-          -Dsonar.python.version=3.10
           -Dsonar.organization=${{ secrets.MY_ORGANIZATION }}
           -Dsonar.projectKey=${{ secrets.MY_PROJECT_KEY }}
-          -Dsonar.python.coverage.reportPath=coverage.xml
           -Dsonar.verbose=true
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
