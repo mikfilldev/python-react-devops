@@ -19,6 +19,7 @@ jobs:
       with:
         projectBaseDir: ./backend
         args: >
+          -Dsonar.branch.name=main
           -Dsonar.organization=${{ secrets.MY_ORGANIZATION }}
           -Dsonar.projectKey=${{ secrets.MY_PROJECT_KEY }}
           -Dsonar.python.coverage.reportPaths=coverage.xml
