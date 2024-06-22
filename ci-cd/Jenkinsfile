@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'cfef09e0-f734-44e3-b552-8a2d983d1f7b', url: 'https://github.com/devops-fundamentals-templates/dofd-05-python-mikfilldev.git']])
+            }
+        }
+        stage('Setup virtual env run formatting and linting') {
+            steps {
+                sh '''python3 -m venv .env'''
+                sh '''ls -lla'''
+                sh '''. .env/bin/activate
+                pip install -r backend/requirements.txt'''
+            }
+        }
+        stage('Run formatter and linter') {
+            steps {
+                sh '''. .env/bin/activate
+                pip install black flake8 pytest
+                python3 -m black ./backend --check
+                python3 -m flake8 ./backend --count --select=E9,F63,F7,F82 --show-source --statistics
+                python3 -m flake8 ./backend --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --ignore F403,F405
+                '''
+            }
+        }
+        stage('Run tests') {
+            steps {
+                sh '''. .env/bin/activate
+                python3 -m pytest -v
+                '''
+            }
+        }
+    }
+}
