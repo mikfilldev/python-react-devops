@@ -22,7 +22,6 @@ jobs:
           -Dsonar.organization=${{ secrets.MY_ORGANIZATION }}
           -Dsonar.projectKey=${{ secrets.MY_PROJECT_KEY }}
           -Dsonar.python.coverage.reportPaths=coverage.xml
-          -Dsonar.sources=lib/
           -Dsonar.verbose=true
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
