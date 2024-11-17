@@ -1,5 +1,13 @@
 # Flask Product API with React frontend
 
+## Create .env file for Frontend API Calls
+
+To bind backend API calls, create a `.env` file from the example file:
+
+```bash
+cp ./frontend/.env.example ./frontend/.env
+```
+
 ## How to run
 ```bash
   docker compose up -d
